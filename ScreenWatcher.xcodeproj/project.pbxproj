@@ -1,0 +1,389 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3727A7D1FFE69F523E6377CD /* BotGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC98F912988B09ADC8AF3C /* BotGuideView.swift */; };
+		4473B9057B16D7D0A5544AFC /* TelegramService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C8EB7FFADF8760491505D /* TelegramService.swift */; };
+		66AC5DFAFF750CD043FDB449 /* ScreenWatcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19859CC3DBEE30F93E8EB741 /* ScreenWatcherApp.swift */; };
+		69B5D884048381FA9ABD551E /* CaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C0C25EF855205232E5A1D9 /* CaptureService.swift */; };
+		768FBF34FEB974214700927F /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BDAAD2978A5D9F1FE2E8F /* ScheduleService.swift */; };
+		77753AF52816F06BC2453234 /* CaptureResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CF16BC57CDFCA6075616F6 /* CaptureResult.swift */; };
+		92C465E414C5F12FD58ACB0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6356B55697E4611F846DB08B /* AppDelegate.swift */; };
+		A4FE62E2DA56338E416C663E /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDE6A86CF830ECA6FE21CB6 /* AppSettings.swift */; };
+		DF6E9C9EEFEEF9488D6C4E11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75F497738E37DFE0E770229D /* Assets.xcassets */; };
+		E86B4A4B2CDACB0BDCB3C281 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AA7619C4077437B035D0D5 /* AppCoordinator.swift */; };
+		EFE4396A211AE6BEC0D227C6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE198D3179E1123CDA90E4DE /* SettingsView.swift */; };
+		FC869198E497201BD249B3BC /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA896E00B29FCE4F7349E8F1 /* KeychainHelper.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0BAC98F912988B09ADC8AF3C /* BotGuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotGuideView.swift; sourceTree = "<group>"; };
+		11CF16BC57CDFCA6075616F6 /* CaptureResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureResult.swift; sourceTree = "<group>"; };
+		19859CC3DBEE30F93E8EB741 /* ScreenWatcherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenWatcherApp.swift; sourceTree = "<group>"; };
+		30C0C25EF855205232E5A1D9 /* CaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureService.swift; sourceTree = "<group>"; };
+		4EDE6A86CF830ECA6FE21CB6 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		6356B55697E4611F846DB08B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		75F497738E37DFE0E770229D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		943C8EB7FFADF8760491505D /* TelegramService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramService.swift; sourceTree = "<group>"; };
+		BA896E00B29FCE4F7349E8F1 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		BE198D3179E1123CDA90E4DE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BE6BDAAD2978A5D9F1FE2E8F /* ScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
+		D2AA7619C4077437B035D0D5 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		D4F05D57758EEC0DF9737125 /* ScreenWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScreenWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		17A47153C0FACC3D6193B07C /* ScreenWatcher */ = {
+			isa = PBXGroup;
+			children = (
+				D2AA7619C4077437B035D0D5 /* AppCoordinator.swift */,
+				6356B55697E4611F846DB08B /* AppDelegate.swift */,
+				19859CC3DBEE30F93E8EB741 /* ScreenWatcherApp.swift */,
+				975100EB866DA5DF592F232D /* Models */,
+				9211F868E6DDF35C441E7A49 /* Resources */,
+				5CBD3AD409AD699823162E34 /* Services */,
+				7837C633825E6CFEE3F351BC /* Views */,
+			);
+			path = ScreenWatcher;
+			sourceTree = "<group>";
+		};
+		5CBD3AD409AD699823162E34 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				30C0C25EF855205232E5A1D9 /* CaptureService.swift */,
+				BA896E00B29FCE4F7349E8F1 /* KeychainHelper.swift */,
+				BE6BDAAD2978A5D9F1FE2E8F /* ScheduleService.swift */,
+				943C8EB7FFADF8760491505D /* TelegramService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7837C633825E6CFEE3F351BC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0BAC98F912988B09ADC8AF3C /* BotGuideView.swift */,
+				BE198D3179E1123CDA90E4DE /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		84BC109FE3C6484EA4DEEB7B = {
+			isa = PBXGroup;
+			children = (
+				17A47153C0FACC3D6193B07C /* ScreenWatcher */,
+				8DF9FF841A3263F54AABA85C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8DF9FF841A3263F54AABA85C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D4F05D57758EEC0DF9737125 /* ScreenWatcher.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9211F868E6DDF35C441E7A49 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				75F497738E37DFE0E770229D /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		975100EB866DA5DF592F232D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4EDE6A86CF830ECA6FE21CB6 /* AppSettings.swift */,
+				11CF16BC57CDFCA6075616F6 /* CaptureResult.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D144F8D51A69762DCCC5F623 /* ScreenWatcher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8A16564AE19339BE2D53A390 /* Build configuration list for PBXNativeTarget "ScreenWatcher" */;
+			buildPhases = (
+				ADF4943BD4D671C3112311B0 /* Sources */,
+				5FEB1D53E202B9279F3A8B2E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScreenWatcher;
+			packageProductDependencies = (
+			);
+			productName = ScreenWatcher;
+			productReference = D4F05D57758EEC0DF9737125 /* ScreenWatcher.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E8E794FB011D90BBE7C2D95C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 2640;
+			};
+			buildConfigurationList = 8D57C77224CC3266148F5409 /* Build configuration list for PBXProject "ScreenWatcher" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 84BC109FE3C6484EA4DEEB7B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 8DF9FF841A3263F54AABA85C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D144F8D51A69762DCCC5F623 /* ScreenWatcher */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5FEB1D53E202B9279F3A8B2E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF6E9C9EEFEEF9488D6C4E11 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADF4943BD4D671C3112311B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E86B4A4B2CDACB0BDCB3C281 /* AppCoordinator.swift in Sources */,
+				92C465E414C5F12FD58ACB0B /* AppDelegate.swift in Sources */,
+				A4FE62E2DA56338E416C663E /* AppSettings.swift in Sources */,
+				3727A7D1FFE69F523E6377CD /* BotGuideView.swift in Sources */,
+				77753AF52816F06BC2453234 /* CaptureResult.swift in Sources */,
+				69B5D884048381FA9ABD551E /* CaptureService.swift in Sources */,
+				FC869198E497201BD249B3BC /* KeychainHelper.swift in Sources */,
+				768FBF34FEB974214700927F /* ScheduleService.swift in Sources */,
+				66AC5DFAFF750CD043FDB449 /* ScreenWatcherApp.swift in Sources */,
+				EFE4396A211AE6BEC0D227C6 /* SettingsView.swift in Sources */,
+				4473B9057B16D7D0A5544AFC /* TelegramService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		35C5BCE8F86CCFE68E9390F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5FDDED48563915CAF48302C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		B3D509C33AC8C753CF85DE7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGNING_REQUIRED = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = NO;
+				INFOPLIST_FILE = ScreenWatcher/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.screenwatcher.app;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		CCD8C984D2976FF7D24D6E79 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGNING_REQUIRED = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = NO;
+				INFOPLIST_FILE = ScreenWatcher/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.screenwatcher.app;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8A16564AE19339BE2D53A390 /* Build configuration list for PBXNativeTarget "ScreenWatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B3D509C33AC8C753CF85DE7E /* Debug */,
+				CCD8C984D2976FF7D24D6E79 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		8D57C77224CC3266148F5409 /* Build configuration list for PBXProject "ScreenWatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35C5BCE8F86CCFE68E9390F7 /* Debug */,
+				5FDDED48563915CAF48302C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E8E794FB011D90BBE7C2D95C /* Project object */;
+}

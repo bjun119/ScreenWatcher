@@ -1,0 +1,19 @@
+# Xcode
+build/
+*.xcarchive
+DerivedData/
+*.xcuserstate
+xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# macOS
+.DS_Store
+*.zip
+
+# Swift Package Manager
+.build/
+Packages/
+
+# AppIcons 원본 (불필요)
+AppIcons/
