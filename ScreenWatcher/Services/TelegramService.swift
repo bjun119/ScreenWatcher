@@ -51,14 +51,10 @@ actor TelegramService {
         guard httpResponse.statusCode == 200 else {
             let desc = parseErrorDescription(from: data) ?? "HTTP \(httpResponse.statusCode)"
             logger.error("Telegram sendPhoto failed: \(desc)")
-            if httpResponse.statusCode == 401 {
-                throw SendError.telegramApiError(description: "Bot Token이 유효하지 않습니다")
-            } else if httpResponse.statusCode == 400 {
-                throw SendError.telegramApiError(description: "Chat ID가 유효하지 않습니다")
-            } else if httpResponse.statusCode == 429 {
+            if httpResponse.statusCode == 429 {
                 throw SendError.networkError(statusCode: 429)
             } else {
-                throw SendError.networkError(statusCode: httpResponse.statusCode)
+                throw SendError.telegramApiError(description: desc)
             }
         }
 

@@ -34,8 +34,10 @@ actor CaptureService {
         }
 
         let config = SCStreamConfiguration()
-        config.width = display.width * 2   // Retina
-        config.height = display.height * 2
+        let maxDimension = 3840
+        let scale = min(1.0, Double(maxDimension) / Double(max(display.width, display.height)))
+        config.width = Int(Double(display.width) * scale)
+        config.height = Int(Double(display.height) * scale)
         config.scalesToFit = true
         config.showsCursor = false
 
