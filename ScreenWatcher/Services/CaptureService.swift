@@ -1,7 +1,6 @@
 import Foundation
 import ScreenCaptureKit
 import AppKit
-import IOKit.pwr_mgt
 import os.log
 
 // MARK: - 화면 캡쳐 서비스 (ScreenCaptureKit)
@@ -96,27 +95,23 @@ actor CaptureService {
 
         logger.info("디스플레이 잠자기 감지 - 깨우기 시도")
 
-        var assertionID: IOPMAssertionID = 0
-        let result = IOPMAssertionDeclareUserActivity(
-            "ScreenWatcher 화면 캡쳐" as CFString,
-            kIOPMUserActiveLocal,
-            &assertionID
-        )
+        // caffeinate -u: 디스플레이가 꺼져 있으면 켠다 (man caffeinate 참조)
+        // IOPMAssertionDeclareUserActivity는 잠자기 방지 API이므로 사용 불가
+        let task = Process()
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/caffeinate")
+        task.arguments = ["-u", "-t", "10"]
+        try? task.run()
 
-        if result == kIOReturnSuccess {
-            IOPMAssertionRelease(assertionID)
-            didWakeDisplay = true
-            logger.info("디스플레이 깨우기 성공 - 켜질 때까지 대기 (최대 15초)")
-            let maxPolls = 50  // 0.3s × 50 = 최대 15초
-            for _ in 0..<maxPolls {
-                try? await Task.sleep(nanoseconds: 300_000_000)
-                if CGDisplayIsAsleep(CGMainDisplayID()) == 0 {
-                    logger.info("디스플레이 활성화 확인")
-                    break
-                }
+        didWakeDisplay = true
+        logger.info("caffeinate -u 실행 - 켜질 때까지 대기 (최대 15초)")
+
+        let maxPolls = 50  // 0.3s × 50 = 최대 15초
+        for _ in 0..<maxPolls {
+            try? await Task.sleep(nanoseconds: 300_000_000)
+            if CGDisplayIsAsleep(CGMainDisplayID()) == 0 {
+                logger.info("디스플레이 활성화 확인")
+                break
             }
-        } else {
-            logger.warning("디스플레이 깨우기 실패 (IOReturn: \(result))")
         }
     }
 
