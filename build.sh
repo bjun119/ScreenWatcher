@@ -6,7 +6,7 @@ set -e
 
 PROJECT_NAME="ScreenWatcher"
 SCHEME="ScreenWatcher"
-VERSION="0.1.0"
+VERSION="0.2.0"
 BUILD_DIR="build"
 
 echo "=== ScreenWatcher 빌드 시작 ==="

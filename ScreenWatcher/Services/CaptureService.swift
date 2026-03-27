@@ -1,6 +1,7 @@
 import Foundation
 import ScreenCaptureKit
 import AppKit
+import IOKit.pwr_mgt
 import os.log
 
 // MARK: - 화면 캡쳐 서비스 (ScreenCaptureKit)
@@ -12,6 +13,7 @@ actor CaptureService {
 
     private let logger = Logger(subsystem: "com.screenwatcher.app", category: "Capture")
     private let maxImageSizeBytes = 2_000_000  // 2MB
+    private var didWakeDisplay = false
 
     // MARK: - 메인 디스플레이 캡쳐
 
@@ -19,6 +21,11 @@ actor CaptureService {
         // 권한 확인
         guard await hasScreenCapturePermission() else {
             throw SendError.capturePermissionDenied
+        }
+
+        // 디스플레이 잠자기 상태 확인 후 깨우기 (설정에서 활성화된 경우만)
+        if await AppSettings.shared.wakeDisplayBeforeCapture {
+            await wakeDisplayIfNeeded()
         }
 
         let content: SCShareableContent
@@ -79,6 +86,51 @@ actor CaptureService {
         }
 
         throw SendError.imageTooLarge
+    }
+
+    // MARK: - 디스플레이 잠자기 해제
+
+    private func wakeDisplayIfNeeded() async {
+        let displayID = CGMainDisplayID()
+        guard CGDisplayIsAsleep(displayID) != 0 else { return }
+
+        logger.info("디스플레이 잠자기 감지 - 깨우기 시도")
+
+        var assertionID: IOPMAssertionID = 0
+        let result = IOPMAssertionDeclareUserActivity(
+            "ScreenWatcher 화면 캡쳐" as CFString,
+            kIOPMUserActiveLocal,
+            &assertionID
+        )
+
+        if result == kIOReturnSuccess {
+            IOPMAssertionRelease(assertionID)
+            didWakeDisplay = true
+            logger.info("디스플레이 깨우기 성공 - 켜질 때까지 대기 (최대 15초)")
+            let maxPolls = 50  // 0.3s × 50 = 최대 15초
+            for _ in 0..<maxPolls {
+                try? await Task.sleep(nanoseconds: 300_000_000)
+                if CGDisplayIsAsleep(CGMainDisplayID()) == 0 {
+                    logger.info("디스플레이 활성화 확인")
+                    break
+                }
+            }
+        } else {
+            logger.warning("디스플레이 깨우기 실패 (IOReturn: \(result))")
+        }
+    }
+
+    // MARK: - 디스플레이 잠자기 복원
+
+    func sleepDisplayIfWoken() {
+        guard didWakeDisplay else { return }
+        didWakeDisplay = false
+
+        logger.info("디스플레이 잠자기 복원")
+        let task = Process()
+        task.executableURL = URL(fileURLWithPath: "/usr/bin/pmset")
+        task.arguments = ["displaysleepnow"]
+        try? task.run()
     }
 
     // MARK: - 권한 확인

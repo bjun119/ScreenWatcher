@@ -44,31 +44,16 @@ struct SettingsView: View {
                         .transition(.opacity)
                 }
 
-                Button("닫기") {
-                    NSApp.keyWindow?.close()
-                }
-                .keyboardShortcut(.cancelAction)
-
                 Button("저장") {
                     saveSettings()
                 }
                 .keyboardShortcut(.defaultAction)
                 .disabled(tokenInput.isEmpty && KeychainHelper.shared.readToken() == nil)
 
-                Button {
-                    coordinator.sendNow()
-                } label: {
-                    if coordinator.isSending {
-                        HStack(spacing: 4) {
-                            ProgressView().controlSize(.small)
-                            Text("전송 중...")
-                        }
-                    } else {
-                        Label("지금 캡쳐 전송", systemImage: "camera.fill")
-                    }
+                Button("닫기") {
+                    NSApp.keyWindow?.close()
                 }
-                .buttonStyle(.borderedProminent)
-                .disabled(coordinator.isSending || !settings.isTelegramConfigured)
+                .keyboardShortcut(.cancelAction)
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 12)
@@ -263,6 +248,11 @@ struct SettingsView: View {
                 get: { settings.launchAtLogin },
                 set: { coordinator.setLaunchAtLogin($0) }
             ))
+
+            Toggle("캡쳐 전 모니터 잠자기 해제", isOn: $settings.wakeDisplayBeforeCapture)
+
+            Toggle("전송 후 모니터 잠자기 복원", isOn: $settings.sleepDisplayAfterCapture)
+                .disabled(!settings.wakeDisplayBeforeCapture)
         }
     }
 

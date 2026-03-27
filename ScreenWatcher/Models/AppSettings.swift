@@ -78,6 +78,12 @@ final class AppSettings: ObservableObject {
     @AppStorage("launchAtLogin")
     var launchAtLogin: Bool = false
 
+    @AppStorage("wakeDisplayBeforeCapture")
+    var wakeDisplayBeforeCapture: Bool = true
+
+    @AppStorage("sleepDisplayAfterCapture")
+    var sleepDisplayAfterCapture: Bool = true
+
     // MARK: 검증
 
     var isTelegramConfigured: Bool {

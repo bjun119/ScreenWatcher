@@ -93,6 +93,11 @@ final class AppCoordinator: ObservableObject {
             lastResult = .failure(error: .captureFailure(underlying: error), at: Date())
         }
 
+        // 전송 완료 후 디스플레이 잠자기 복원 (설정에서 활성화된 경우만)
+        if AppSettings.shared.sleepDisplayAfterCapture {
+            await CaptureService.shared.sleepDisplayIfWoken()
+        }
+
         updateMenuBarIcon()
     }
 
