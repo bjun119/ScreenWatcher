@@ -109,7 +109,8 @@ actor CaptureService {
         for _ in 0..<maxPolls {
             try? await Task.sleep(nanoseconds: 300_000_000)
             if CGDisplayIsAsleep(CGMainDisplayID()) == 0 {
-                logger.info("디스플레이 활성화 확인")
+                logger.info("디스플레이 활성화 확인 - 5초 안정화 대기")
+                try? await Task.sleep(nanoseconds: 5_000_000_000)
                 break
             }
         }
