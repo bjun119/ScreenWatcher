@@ -4,7 +4,7 @@ import SwiftUI
 // MARK: - 앱 델리게이트 (메뉴바 아이콘 + NSMenu 관리)
 
 @MainActor
-final class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     private var statusItem: NSStatusItem?
     private var settingsWindowController: NSWindowController?
@@ -43,6 +43,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         updateMenu()
     }
 
+    // MARK: - NSMenuDelegate
+
+    nonisolated func menuWillOpen(_ menu: NSMenu) {
+        Task { @MainActor in
+            self.updateMenu()
+        }
+    }
+
     // MARK: - 메뉴 갱신
 
     @MainActor
@@ -64,6 +72,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         // 메뉴 구성
         let menu = NSMenu()
+        menu.delegate = self
 
         // 상태 표시 (비활성 항목)
         let statusItem = NSMenuItem(title: coordinator.statusSummary, action: nil, keyEquivalent: "")
@@ -145,7 +154,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func markVariationalAuth() {
-        AppCoordinator.shared.markVariationalAuthenticated()
+        let alert = NSAlert()
+        alert.messageText = "Variational 인증 완료"
+        alert.informativeText = "Variational 지갑 인증을 실제로 완료하셨나요?\n인증 타이머가 오늘 날짜로 초기화됩니다."
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "확인")
+        alert.addButton(withTitle: "취소")
+
+        if alert.runModal() == .alertFirstButtonReturn {
+            AppCoordinator.shared.markVariationalAuthenticated()
+        }
     }
 
     @objc private func sendNow() {

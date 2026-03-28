@@ -11,8 +11,10 @@ struct SettingsView: View {
     @State private var showToken: Bool = false
     @State private var showBotGuide: Bool = false
     @State private var showSavedConfirmation: Bool = false
-    @State private var walletStatusText: String = ""
+    @State private var showAuthConfirmation: Bool = false
     @State private var now: Date = Date()
+
+    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -65,7 +67,9 @@ struct SettingsView: View {
         .frame(width: 480)
         .onAppear {
             tokenInput = KeychainHelper.shared.readToken() ?? ""
-            refreshWalletStatus()
+        }
+        .onReceive(timer) { date in
+            now = date
         }
         .sheet(isPresented: $showBotGuide) {
             BotGuideView()
@@ -143,20 +147,18 @@ struct SettingsView: View {
                 .font(.subheadline)
                 .foregroundColor(walletStatusColor)
 
-            HStack {
-                Button("Variational 인증 완료") {
+            Button("Variational 인증 완료") {
+                showAuthConfirmation = true
+            }
+            .buttonStyle(.borderedProminent)
+            .alert("Variational 인증 완료", isPresented: $showAuthConfirmation) {
+                Button("확인", role: .destructive) {
                     coordinator.markVariationalAuthenticated()
-                    refreshWalletStatus()
+                    now = Date()
                 }
-                .buttonStyle(.borderedProminent)
-
-                Spacer()
-
-                Button("상태 새로고침") {
-                    refreshWalletStatus()
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
+                Button("취소", role: .cancel) {}
+            } message: {
+                Text("Variational 지갑 인증을 실제로 완료하셨나요?\n인증 타이머가 오늘 날짜로 초기화됩니다.")
             }
 
             Toggle("알림음 켜기 (무음 해제)", isOn: $settings.variationalNotificationSound)
@@ -178,25 +180,24 @@ struct SettingsView: View {
         return .green
     }
 
-    private func refreshWalletStatus() {
-        now = Date()
+    private var walletStatusText: String {
         guard let lastAuth = UserDefaults.standard.object(forKey: "variationalLastAuthDate") as? Date else {
-            walletStatusText = "인증 기록 없음 — 인증 완료 버튼을 눌러 시작하세요."
-            return
+            return "인증 기록 없음 — 인증 완료 버튼을 눌러 시작하세요."
         }
         let elapsed = now.timeIntervalSince(lastAuth)
         let days = Int(elapsed / 86400)
         let hours = Int((elapsed.truncatingRemainder(dividingBy: 86400)) / 3600)
         let minutes = Int((elapsed.truncatingRemainder(dividingBy: 3600)) / 60)
+        let seconds = Int(elapsed.truncatingRemainder(dividingBy: 60))
 
         if elapsed >= 7 * 86400 {
-            walletStatusText = "⚠️ 만료 초과: \(days)일 \(hours)시간 \(minutes)분 경과"
+            return "⚠️ 만료 초과: \(days)일 \(hours)시간 \(minutes)분 \(seconds)초 경과"
         } else if elapsed >= 6 * 86400 {
             let remainHours = Int((7 * 86400 - elapsed) / 3600)
-            walletStatusText = "경고: \(days)일 \(hours)시간 \(minutes)분 경과 (약 \(remainHours)시간 후 만료)"
+            return "경고: \(days)일 \(hours)시간 \(minutes)분 \(seconds)초 경과 (약 \(remainHours)시간 후 만료)"
         } else {
             let remainDays = 7 - days
-            walletStatusText = "정상: \(days)일 \(hours)시간 \(minutes)분 경과 (\(remainDays)일 후 만료)"
+            return "정상: \(days)일 \(hours)시간 \(minutes)분 \(seconds)초 경과 (\(remainDays)일 후 만료)"
         }
     }
 
