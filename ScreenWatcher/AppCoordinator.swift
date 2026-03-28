@@ -13,6 +13,8 @@ final class AppCoordinator: ObservableObject {
 
     private let logger = Logger(subsystem: "com.screenwatcher.app", category: "Coordinator")
 
+    private var reminderTimer: Timer?
+
     // MARK: - 발행 속성 (메뉴바 UI 업데이트용)
 
     @Published var isEnabled: Bool = false {
@@ -33,6 +35,30 @@ final class AppCoordinator: ObservableObject {
     func setup() {
         isEnabled = AppSettings.shared.isEnabled
         if isEnabled { startSchedule() }
+        startReminderTimer()
+    }
+
+    // MARK: - Variational 재인증 알림 타이머
+
+    private func startReminderTimer() {
+        reminderTimer?.invalidate()
+        reminderTimer = Timer.scheduledTimer(withTimeInterval: 30 * 60, repeats: true) { _ in
+            Task {
+                await WalletAuthReminderService.shared.checkAndNotify()
+            }
+        }
+        RunLoop.main.add(reminderTimer!, forMode: .common)
+        // 앱 시작 직후 1회 즉시 점검
+        Task {
+            await WalletAuthReminderService.shared.checkAndNotify()
+        }
+    }
+
+    func markVariationalAuthenticated() {
+        Task {
+            await WalletAuthReminderService.shared.markAuthenticated()
+        }
+        updateMenuBarIcon()
     }
 
     // MARK: - 스케줄 제어

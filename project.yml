@@ -23,7 +23,7 @@ targets:
         LSUIElement: true
         NSScreenCaptureUsageDescription: "ScreenWatcher는 화면을 캡쳐해 Telegram으로 전송하기 위해 화면 녹화 권한이 필요합니다."
         CFBundleDisplayName: ScreenWatcher
-        CFBundleShortVersionString: "0.1.0"
+        CFBundleShortVersionString: "0.3.0"
         CFBundleVersion: "1"
         NSHumanReadableCopyright: "Copyright © 2026 ScreenWatcher. All rights reserved."
     settings:

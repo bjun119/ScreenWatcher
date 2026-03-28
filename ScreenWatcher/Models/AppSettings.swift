@@ -70,6 +70,17 @@ final class AppSettings: ObservableObject {
         }
     }
 
+    // MARK: Variational 재인증
+
+    /// Variational 마지막 인증 일시 (WalletAuthReminderService가 직접 UserDefaults에 저장)
+    var lastVariationalAuthDate: Date? {
+        get { UserDefaults.standard.object(forKey: "variationalLastAuthDate") as? Date }
+    }
+
+    /// true = 알림음 켜짐 (disable_notification: false)
+    @AppStorage("variationalNotificationSound")
+    var variationalNotificationSound: Bool = true
+
     // MARK: 시스템
 
     @AppStorage("isEnabled")

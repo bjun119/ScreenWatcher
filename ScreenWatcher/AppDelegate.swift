@@ -96,6 +96,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         menu.addItem(.separator())
 
+        // Variational 인증 상태 표시
+        let walletStatusItem = NSMenuItem(title: variationalStatusText(), action: nil, keyEquivalent: "")
+        walletStatusItem.isEnabled = false
+        menu.addItem(walletStatusItem)
+
+        // Variational 인증 완료
+        let walletItem = NSMenuItem(
+            title: "Variational 인증 완료",
+            action: #selector(markVariationalAuth),
+            keyEquivalent: "w"
+        )
+        walletItem.target = self
+        menu.addItem(walletItem)
+
+        menu.addItem(.separator())
+
         // 설정
         let settingsItem = NSMenuItem(
             title: "설정...",
@@ -128,9 +144,33 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         AppCoordinator.shared.isEnabled = false
     }
 
+    @objc private func markVariationalAuth() {
+        AppCoordinator.shared.markVariationalAuthenticated()
+    }
+
     @objc private func sendNow() {
         Task { @MainActor in
             AppCoordinator.shared.sendNow()
+        }
+    }
+
+    private func variationalStatusText() -> String {
+        guard let lastAuth = UserDefaults.standard.object(forKey: "variationalLastAuthDate") as? Date else {
+            return "인증 기록 없음"
+        }
+        let elapsed = Date().timeIntervalSince(lastAuth)
+        let days = Int(elapsed / 86400)
+        let hours = Int((elapsed.truncatingRemainder(dividingBy: 86400)) / 3600)
+        let minutes = Int((elapsed.truncatingRemainder(dividingBy: 3600)) / 60)
+
+        if elapsed >= 7 * 86400 {
+            return "만료 초과 (\(days)일 \(hours)시간 \(minutes)분 경과)"
+        } else if elapsed >= 6 * 86400 {
+            let remainHours = Int((7 * 86400 - elapsed) / 3600)
+            return "\(days)일 \(hours)시간 경과 (\(remainHours)h 후 만료)"
+        } else {
+            let remainDays = 7 - days
+            return "\(days)일 \(hours)시간 \(minutes)분 경과 (D-\(remainDays))"
         }
     }
 

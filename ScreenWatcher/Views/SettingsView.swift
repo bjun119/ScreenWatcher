@@ -11,12 +11,16 @@ struct SettingsView: View {
     @State private var showToken: Bool = false
     @State private var showBotGuide: Bool = false
     @State private var showSavedConfirmation: Bool = false
+    @State private var walletStatusText: String = ""
+    @State private var now: Date = Date()
 
     var body: some View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
                     telegramSection
+                    Divider()
+                    variationalSection
                     Divider()
                     intervalSection
                     Divider()
@@ -61,6 +65,7 @@ struct SettingsView: View {
         .frame(width: 480)
         .onAppear {
             tokenInput = KeychainHelper.shared.readToken() ?? ""
+            refreshWalletStatus()
         }
         .sheet(isPresented: $showBotGuide) {
             BotGuideView()
@@ -124,6 +129,74 @@ struct SettingsView: View {
                 TextField("예: 123456789 또는 -100...", text: $settings.chatId)
                     .textFieldStyle(.roundedBorder)
             }
+        }
+    }
+
+    // MARK: - Variational 재인증 섹션
+
+    private var variationalSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Label("Variational 재인증 관리", systemImage: "key.fill")
+                .font(.headline)
+
+            Text(walletStatusText)
+                .font(.subheadline)
+                .foregroundColor(walletStatusColor)
+
+            HStack {
+                Button("Variational 인증 완료") {
+                    coordinator.markVariationalAuthenticated()
+                    refreshWalletStatus()
+                }
+                .buttonStyle(.borderedProminent)
+
+                Spacer()
+
+                Button("상태 새로고침") {
+                    refreshWalletStatus()
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+            }
+
+            Toggle("알림음 켜기 (무음 해제)", isOn: $settings.variationalNotificationSound)
+
+            Text("마지막 인증으로부터 6일 경과 시 텔레그램 알림을 전송합니다.")
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+    }
+
+    private var walletStatusColor: Color {
+        // actor isolation 우회: 동기적으로 UserDefaults에서 직접 읽기
+        guard let lastAuth = UserDefaults.standard.object(forKey: "variationalLastAuthDate") as? Date else {
+            return .secondary
+        }
+        let elapsed = now.timeIntervalSince(lastAuth)
+        if elapsed >= 7 * 86400 { return .red }
+        if elapsed >= 6 * 86400 { return .orange }
+        return .green
+    }
+
+    private func refreshWalletStatus() {
+        now = Date()
+        guard let lastAuth = UserDefaults.standard.object(forKey: "variationalLastAuthDate") as? Date else {
+            walletStatusText = "인증 기록 없음 — 인증 완료 버튼을 눌러 시작하세요."
+            return
+        }
+        let elapsed = now.timeIntervalSince(lastAuth)
+        let days = Int(elapsed / 86400)
+        let hours = Int((elapsed.truncatingRemainder(dividingBy: 86400)) / 3600)
+        let minutes = Int((elapsed.truncatingRemainder(dividingBy: 3600)) / 60)
+
+        if elapsed >= 7 * 86400 {
+            walletStatusText = "⚠️ 만료 초과: \(days)일 \(hours)시간 \(minutes)분 경과"
+        } else if elapsed >= 6 * 86400 {
+            let remainHours = Int((7 * 86400 - elapsed) / 3600)
+            walletStatusText = "경고: \(days)일 \(hours)시간 \(minutes)분 경과 (약 \(remainHours)시간 후 만료)"
+        } else {
+            let remainDays = 7 - days
+            walletStatusText = "정상: \(days)일 \(hours)시간 \(minutes)분 경과 (\(remainDays)일 후 만료)"
         }
     }
 

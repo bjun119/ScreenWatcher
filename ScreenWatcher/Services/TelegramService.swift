@@ -61,6 +61,49 @@ actor TelegramService {
         logger.info("Telegram sendPhoto success")
     }
 
+    // MARK: - 텍스트 메시지 전송
+
+    func sendMessage(text: String, silent: Bool = false) async throws {
+        let settings = AppSettings.shared
+        guard let token = KeychainHelper.shared.readToken(), !token.isEmpty else {
+            throw SendError.tokenNotConfigured
+        }
+        guard !settings.chatId.isEmpty else {
+            throw SendError.chatIdNotConfigured
+        }
+
+        let urlString = "\(baseURL)/bot\(token)/sendMessage"
+        guard let url = URL(string: urlString) else {
+            throw SendError.telegramApiError(description: "잘못된 URL")
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.timeoutInterval = 30
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = [
+            "chat_id": settings.chatId,
+            "text": text,
+            "disable_notification": silent
+        ]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+
+        let (data, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw SendError.networkError(statusCode: 0)
+        }
+
+        guard httpResponse.statusCode == 200 else {
+            let desc = parseErrorDescription(from: data) ?? "HTTP \(httpResponse.statusCode)"
+            logger.error("Telegram sendMessage failed: \(desc)")
+            throw SendError.telegramApiError(description: desc)
+        }
+
+        logger.info("Telegram sendMessage success")
+    }
+
     // MARK: - 연결 테스트 (Bot 이름 반환)
 
     func testConnection(token: String) async throws -> String {

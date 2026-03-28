@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3727A7D1FFE69F523E6377CD /* BotGuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAC98F912988B09ADC8AF3C /* BotGuideView.swift */; };
 		4473B9057B16D7D0A5544AFC /* TelegramService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943C8EB7FFADF8760491505D /* TelegramService.swift */; };
+		CC1A2B3D4E5F6A7B8C9D0E1F /* WalletAuthReminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2B3C4D5E6F7A8B9C0D1E2F /* WalletAuthReminderService.swift */; };
 		66AC5DFAFF750CD043FDB449 /* ScreenWatcherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19859CC3DBEE30F93E8EB741 /* ScreenWatcherApp.swift */; };
 		69B5D884048381FA9ABD551E /* CaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C0C25EF855205232E5A1D9 /* CaptureService.swift */; };
 		768FBF34FEB974214700927F /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6BDAAD2978A5D9F1FE2E8F /* ScheduleService.swift */; };
@@ -30,6 +31,7 @@
 		6356B55697E4611F846DB08B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75F497738E37DFE0E770229D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		943C8EB7FFADF8760491505D /* TelegramService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramService.swift; sourceTree = "<group>"; };
+		DD2B3C4D5E6F7A8B9C0D1E2F /* WalletAuthReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAuthReminderService.swift; sourceTree = "<group>"; };
 		BA896E00B29FCE4F7349E8F1 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		BE198D3179E1123CDA90E4DE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BE6BDAAD2978A5D9F1FE2E8F /* ScheduleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				BA896E00B29FCE4F7349E8F1 /* KeychainHelper.swift */,
 				BE6BDAAD2978A5D9F1FE2E8F /* ScheduleService.swift */,
 				943C8EB7FFADF8760491505D /* TelegramService.swift */,
+				DD2B3C4D5E6F7A8B9C0D1E2F /* WalletAuthReminderService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				66AC5DFAFF750CD043FDB449 /* ScreenWatcherApp.swift in Sources */,
 				EFE4396A211AE6BEC0D227C6 /* SettingsView.swift in Sources */,
 				4473B9057B16D7D0A5544AFC /* TelegramService.swift in Sources */,
+				CC1A2B3D4E5F6A7B8C9D0E1F /* WalletAuthReminderService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
